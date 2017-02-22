@@ -11,12 +11,13 @@ adaptiveMetropolis <- function(p,t0,t1,nm,sd_mh,ldens,...){
   #   ldens: log density function of the target distribution.
   #   ...: optional arguments to ldens.
   
+  suppressMessages(require(mvtnorm))
   # preparation
   sd = 2.4^2/p
   eps = 0.1
   sps = NULL
   sp = rep(0,p)
-  C0 = diag(0.1,p)
+  C0 = diag(sd_mh,p)
   for (iter in 1:nm){
     if (iter%%(nm/10)==0){
       cat("iteration",iter,"\n")
